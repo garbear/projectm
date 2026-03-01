@@ -34,6 +34,10 @@ include(GNUInstallDirs)
 include(FastMathOptimizations)
 include(CheckCSourceCompiles)
 
+if(MSVC)
+  add_compile_definitions(_CRT_SECURE_NO_WARNINGS _CRT_NONSTDC_NO_DEPRECATE)
+endif()
+
 check_c_source_compiles("#include <math.h>\nint main() { double x = sin(1.0);return 0;}" NO_MATH_LIB_REQUIRED)
 if(NOT NO_MATH_LIB_REQUIRED)
     list(APPEND CMAKE_REQUIRED_LIBRARIES m)
